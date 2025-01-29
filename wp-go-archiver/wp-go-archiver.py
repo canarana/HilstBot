@@ -8,7 +8,7 @@ DATE_REGEX = r"\[\[(\w+ \d{1,2})\]\], \[\[(\d{4})\]\]"
 CURRENT_ITEM = r"\*\s?.+?\([ \w]+?\)\n"
 ADVERTISEMENT = " ([[Wikipedia:Bots/Requests for approval/APersonBot 6|Bot]])"
 
-print("Starting dyknotifier at " + datetime.datetime.utcnow().isoformat())
+print("Starting dyknotifier at " + datetime.datetime.now(datetime.timezone.utc).isoformat())
 
 site = pywikibot.Site("en", "wikipedia")
 site.login()
