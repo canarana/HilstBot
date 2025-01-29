@@ -6,7 +6,7 @@ import sys
 WP_GO_TITLE = "Wikipedia:Goings-on"
 DATE_REGEX = r"\[\[(\w+ \d{1,2})\]\], \[\[(\d{4})\]\]"
 CURRENT_ITEM = r"\*\s?.+?\([ \w]+?\)\n"
-ADVERTISEMENT = " ([[Wikipedia:Bots/Requests for approval/APersonBot 6|Bot]])"
+ADVERTISEMENT = " ([[Wikipedia:Bots/Requests for approval/HilstBot|Bot]])"
 
 print("Starting dyknotifier at " + datetime.datetime.now(datetime.timezone.utc).isoformat())
 
