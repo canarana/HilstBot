@@ -1,14 +1,16 @@
+"""wp-go-archiver archives Wikipedia:Goings-on"""
+
 import datetime
-import pywikibot
 import re
 import sys
+import pywikibot
 
 WP_GO_TITLE = "Wikipedia:Goings-on"
 DATE_REGEX = r"\[\[(\w+ \d{1,2})\]\], \[\[(\d{4})\]\]"
 CURRENT_ITEM = r"\*\s?.+?\([ \w]+?\)\n"
 ADVERTISEMENT = " ([[Wikipedia:Bots/Requests for approval/HilstBot|Bot]])"
 
-print("Starting dyknotifier at " + datetime.datetime.now(datetime.timezone.utc).isoformat())
+print("Starting wp-go-archiver at " + datetime.datetime.now(datetime.UTC).isoformat())
 
 site = pywikibot.Site("en", "wikipedia")
 site.login()
@@ -18,7 +20,8 @@ current_text = wp_go.get()
 
 # Obtain the next date to appear on WP:GO
 new_date = datetime.datetime.today()
-while new_date.weekday() != 6: new_date += datetime.timedelta(1)
+while new_date.weekday() != 6:
+    new_date += datetime.timedelta(1)
 
 # Verify that the archive hasn't been done yet
 date_on_page = re.search(DATE_REGEX, current_text).group(1)
@@ -29,7 +32,7 @@ if date_on_page == new_date.strftime("%B %-d"):
 # Archive the current page
 previous_date = ", ".join(re.search(DATE_REGEX, current_text).groups())
 archive_title = WP_GO_TITLE + "/" + previous_date
-print("Archiving to {}".format(archive_title))
+print(f"Archiving to {archive_title}")
 wp_go.save(summary="Stripping hatnote before archival" + ADVERTISEMENT)
 wp_go.move(archive_title, reason="Archive" + ADVERTISEMENT, movetalk=False)
 
